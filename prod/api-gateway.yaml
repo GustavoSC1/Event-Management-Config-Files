@@ -45,6 +45,9 @@ eureka:
       defaultZone: ${PROD_EUREKA_DEFAULTZONE}
       
 management:
+  zipkin:
+    tracing:
+      endpoint: ${PROD_ZIPKIN_TRACING_ENDPOINT}
   endpoints:
     web:
       exposure:
@@ -52,4 +55,4 @@ management:
           - health
   tracing:
     sampling:
-      probability: 1.0     
+      probability: 0.05

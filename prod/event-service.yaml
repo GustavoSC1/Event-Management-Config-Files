@@ -15,7 +15,7 @@ spring:
         show_sql: true
   output:
     ansi:
-      enabled: Always  
+      enabled: Always
   rabbitmq:
     host: ${PROD_AMQP_HOST}
     port: ${PROD_AMQP_PORT}
@@ -29,11 +29,16 @@ eureka:
       
 rabbitmq:
   exchange:
-    paymentExchange: payments.v1.payment_created
+    userExchange: users.v1.user_event
+    notificationExchange:  notifications.v1.notification_created
+    paymentExchange:  payments.v1.payment_created
     paymentMadeExchange: payments.v1.payment_made
   queue:
-    paymentQueue: payments.v1.payment_created.send_payment
+    userQueue: users.v1.user_event.send_user
+    paymentMadeQueue: payments.v1.payment_made.send_confirmation_to_event
   key:
+    userKey: users.v1.user_event.send_user.key
+    notificationKey: notifications.v1.notification_created.send_notification.key
     paymentKey: payments.v1.payment_created.send_payment.key
     
 jwt:
@@ -43,6 +48,9 @@ jwt:
     key: 'classpath:app.pub'
     
 management:
+  zipkin:
+    tracing:
+      endpoint: ${PROD_ZIPKIN_TRACING_ENDPOINT}
   endpoints:
     web:
       exposure:
@@ -50,10 +58,11 @@ management:
           - health
   tracing:
     sampling:
-      probability: 1.0
+      probability: 0.05
       
 logging:
   level:
     com:
       gustavo:
-        paymentservice: DEBUG
+        eventservice: DEBUG
+        
