@@ -3,8 +3,8 @@ server:
   
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/db-notification
-    username: root
+    url: jdbc:postgresql://localhost:5436/db-notification
+    username: user
     password: root
   jpa:
     hibernate:

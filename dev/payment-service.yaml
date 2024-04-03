@@ -3,8 +3,8 @@ server:
   
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/db-payment
-    username: root
+    url: jdbc:postgresql://localhost:5438/db-payment
+    username: user
     password: root
   jpa:
     hibernate:
